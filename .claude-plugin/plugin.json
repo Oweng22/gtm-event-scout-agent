@@ -1,0 +1,19 @@
+{
+  "name": "gtm-event-scout-agent",
+  "version": "2.0.0",
+  "description": "Finds business and networking events near you every week, verifies each on its official page, adds them to your calendar (Google Calendar directly, or Outlook through a Google Calendar subscription), and re-checks and corrects its own events as organizers update them. Claude interviews you, researches your local sources and sets up a weekly Claude Code cloud routine.",
+  "author": {
+    "name": "Owen Green",
+    "url": "https://github.com/oweng22"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/oweng22/gtm-event-scout-agent",
+  "repository": "https://github.com/oweng22/gtm-event-scout-agent",
+  "keywords": [
+    "events",
+    "networking",
+    "calendar",
+    "business-development",
+    "routines"
+  ]
+}
