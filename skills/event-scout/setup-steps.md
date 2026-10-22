@@ -14,23 +14,25 @@ You do this inside the Claude app; no browser needed.
 Connectors belong to your Claude account, so once you connect them in the app, the weekly cloud routine can use them too.
 
 ### 2. Give the routine full internet access
-The routine runs in a cloud environment that starts on **Trusted** network access. Trusted only allows package registries, GitHub and cloud tools, so the routine can't open chamber calendars or event pages, finds almost nothing, and its summary starts with "NETWORK BLOCKED". Switch it to **Full** once, in the Claude app:
-1. In the Claude app, open the **Code** tab and start a new session, so you're on the screen with the message box.
-2. In the row of controls just under the message box, click the first one, the **environment selector**.
-3. Under **Cloud**, find **Default** (or the environment Claude names, if yours is different). Hover over its row and click the **gear icon** that appears on the right.
-4. The **Edit cloud environment** dialog opens. Click the **Network access** dropdown and choose **Full** ("Any domain").
-5. Click **Save changes**.
-6. Tell Claude you're done. The change applies from the routine's next run, so Claude starts a test run and checks that the summary no longer says "NETWORK BLOCKED".
+The routine runs in a cloud environment that starts on **Trusted** network access. Trusted only allows package registries, GitHub and cloud tools, so the routine can't open chamber calendars or event pages, finds almost nothing, and its summary starts with "NETWORK BLOCKED". Switch it to **Full** once, from the routine itself in the Claude app:
+1. In the Claude app, click **Routines** in the sidebar.
+2. Find your Event Scout routine and click **Edit** on it.
+3. At the top of the edit window, click the settings button and choose **Edit**. This opens the routine's advanced settings.
+4. Click the **cloud icon**. It shows the name of the environment the routine runs in, usually **Default**.
+5. Click the **gear icon** next to the cloud icon. The **Edit cloud environment** window opens.
+6. The first setting at the top is **Network access**. Open it and choose **Full** ("Any domain").
+7. Click **Save changes**, then save the routine if it asks.
+8. Tell Claude you're done. The change applies from the routine's next run, so Claude starts a test run and checks that the summary no longer says "NETWORK BLOCKED".
 
-What the four options mean:
+What the four Network access options mean:
 - **None:** no internet at all.
 - **Trusted** (the starting setting): package registries, GitHub and cloud tools only.
 - **Full:** any website. This is what the scout needs, because events are posted on hundreds of different sites.
 - **Custom:** only the websites you list. Use this only if your company doesn't allow Full: ask Claude for the domain list, paste it into **Allowed domains** (one per line), and tick **Also include default list of common package managers**.
 
 Good to know:
-- This setting applies to every session and routine that uses this environment. To leave **Default** alone, make a separate one instead: in the environment selector, choose **New environment**, open the **Cloud** tab, name it "Event Scout", set **Network access** to **Full**, and click **Add environment**. Then tell Claude, and it switches the routine to that environment.
-- If the setting is locked or you can't change it, your company manages the environment. Ask your Claude admin to set Network access to Full (they do it under admin settings, **Cloud environments**), or to allow the domains Claude lists.
+- The setting belongs to the environment, so it also applies to any other routine or cloud session that uses **Default**. If you'd rather keep Default as it is, ask Claude to set the scout up on its own environment instead; it walks you through creating one named "Event Scout" with Full access.
+- If Network access is locked or you can't change it, your company manages the environment. Ask your Claude admin to set it to Full (they do it under admin settings, **Cloud environments**), or to allow the domains Claude lists.
 
 ### 3. Connect Google Calendar to Outlook (Outlook users only)
 The routine adds events to Google Calendar. To see them in Outlook, subscribe Outlook to that Google calendar. This is a one-time step, and events then appear automatically.
@@ -57,7 +59,7 @@ Why not just invite your Outlook address? If your Google account uses the same e
 | What you see | What it means | Fix |
 |---|---|---|
 | Summary starts with "NETWORK BLOCKED" | The routine's environment can't reach websites | Step 2 above: set Network access to Full |
-| A run is stuck or waiting | It stopped at a permission prompt | Code tab, **Scheduled**, open Event Scout, open the run from **History**, and answer the prompt (or ask Claude to check the run) |
+| A run is stuck or waiting | It stopped at a permission prompt | **Routines**, open Event Scout, open the run from **History**, and answer the prompt (or ask Claude to check the run) |
 | Summary starts with "CALENDAR NOT UPDATED" | The calendar connector isn't attached or isn't working | Reconnect Google Calendar (step 1), then ask Claude to check the routine's connectors |
 | "Couldn't import calendar" in Outlook | You used the public address | Use the Secret address (step 3) |
 | Events show up at the wrong time | The time zone wasn't set | Ask Claude to check the routine prompt; every event must set your time zone |
