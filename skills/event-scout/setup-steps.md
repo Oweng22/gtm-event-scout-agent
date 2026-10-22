@@ -5,19 +5,32 @@ Claude does everything else. When one of these steps is needed, Claude gives the
 ### 1. Connect Google Calendar to Claude
 You do this inside the Claude app; no browser needed.
 1. Claude shows a **Connect** button for **Google Calendar** right in the chat. Click it.
-   - If you don't see a button, open **Settings** in the Claude app, go to **Connectors**, find **Google Calendar** and click **Connect**.
+   - If you don't see a button: click the **+** next to the message box and choose **Add connectors** (if the menu shows **Connectors** instead, choose it, then **Browse connectors**). Search for **Google Calendar** and click **Connect**.
+   - To check or remove connectors later, go to **Settings**, then **Connectors**, in the Claude app.
 2. Sign in with the Google account whose calendar should receive events, and click **Allow**.
 3. Optional, for Outlook users: connect **Microsoft 365** the same way, so the routine can check your Outlook calendar for duplicates and conflicts.
 4. Tell Claude when you're done. It checks that the connector shows up.
 
 Connectors belong to your Claude account, so once you connect them in the app, the weekly cloud routine can use them too.
 
-### 2. Turn on internet access for the routine
-The routine runs in a cloud environment, and the default environment can block websites. If it's blocked, the routine can't open any event pages and misses most events. Its summary will start with "NETWORK BLOCKED" if that happens.
-1. Open your routine at https://claude.ai/code/routines (Claude gives you the exact link).
-2. Open the settings for the environment the routine uses (usually **Default**).
-3. Set **Network access** to **Full**. If you only see an allowlist option, choose it and ask Claude for the list of domains to add.
-4. Save, and tell Claude, so it can confirm with a test run.
+### 2. Give the routine full internet access
+The routine runs in a cloud environment that starts on **Trusted** network access. Trusted only allows package registries, GitHub and cloud tools, so the routine can't open chamber calendars or event pages, finds almost nothing, and its summary starts with "NETWORK BLOCKED". Switch it to **Full** once, in the Claude app:
+1. In the Claude app, open the **Code** tab and start a new session, so you're on the screen with the message box.
+2. In the row of controls just under the message box, click the first one, the **environment selector**.
+3. Under **Cloud**, find **Default** (or the environment Claude names, if yours is different). Hover over its row and click the **gear icon** that appears on the right.
+4. The **Edit cloud environment** dialog opens. Click the **Network access** dropdown and choose **Full** ("Any domain").
+5. Click **Save changes**.
+6. Tell Claude you're done. The change applies from the routine's next run, so Claude starts a test run and checks that the summary no longer says "NETWORK BLOCKED".
+
+What the four options mean:
+- **None:** no internet at all.
+- **Trusted** (the starting setting): package registries, GitHub and cloud tools only.
+- **Full:** any website. This is what the scout needs, because events are posted on hundreds of different sites.
+- **Custom:** only the websites you list. Use this only if your company doesn't allow Full: ask Claude for the domain list, paste it into **Allowed domains** (one per line), and tick **Also include default list of common package managers**.
+
+Good to know:
+- This setting applies to every session and routine that uses this environment. To leave **Default** alone, make a separate one instead: in the environment selector, choose **New environment**, open the **Cloud** tab, name it "Event Scout", set **Network access** to **Full**, and click **Add environment**. Then tell Claude, and it switches the routine to that environment.
+- If the setting is locked or you can't change it, your company manages the environment. Ask your Claude admin to set Network access to Full (they do it under admin settings, **Cloud environments**), or to allow the domains Claude lists.
 
 ### 3. Connect Google Calendar to Outlook (Outlook users only)
 The routine adds events to Google Calendar. To see them in Outlook, subscribe Outlook to that Google calendar. This is a one-time step, and events then appear automatically.
@@ -43,7 +56,8 @@ Why not just invite your Outlook address? If your Google account uses the same e
 ## Troubleshooting
 | What you see | What it means | Fix |
 |---|---|---|
-| Summary starts with "NETWORK BLOCKED" | The routine's environment can't reach websites | Step 2 above |
+| Summary starts with "NETWORK BLOCKED" | The routine's environment can't reach websites | Step 2 above: set Network access to Full |
+| A run is stuck or waiting | It stopped at a permission prompt | Code tab, **Scheduled**, open Event Scout, open the run from **History**, and answer the prompt (or ask Claude to check the run) |
 | Summary starts with "CALENDAR NOT UPDATED" | The calendar connector isn't attached or isn't working | Reconnect Google Calendar (step 1), then ask Claude to check the routine's connectors |
 | "Couldn't import calendar" in Outlook | You used the public address | Use the Secret address (step 3) |
 | Events show up at the wrong time | The time zone wasn't set | Ask Claude to check the routine prompt; every event must set your time zone |

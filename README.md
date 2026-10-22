@@ -5,7 +5,7 @@ A Claude Code plugin that finds business and networking events near you every we
 It works for any company in any city. Claude interviews you about your company, who you want to meet, how far you'll travel and which groups you belong to. It then researches your local chambers, associations, meetups and regional conferences, and sets up a weekly routine that runs in the cloud.
 
 ## What you need
-- Claude Code, and a Claude account with cloud routines (Claude Code on the web). Without routines, Claude can run the same search for you on demand.
+- Claude Code, and a Claude account with scheduled tasks (cloud routines). Without them, Claude can run the same search for you on demand.
 - A Google Calendar you can connect to Claude. Events are added there. If you live in Outlook, you subscribe Outlook to that Google calendar, so the events show up in Outlook too.
 - Optional: the Microsoft 365 connector, so the routine can read your Outlook calendar to skip events you already have and flag conflicts. It can't write to Outlook.
 
@@ -42,13 +42,10 @@ It helps to have ready: a short description of your company (or a positioning do
 - Each weekly run takes about 8 to 10 minutes on the recommended Opus model.
 
 ## Changing or removing it
-- To change anything (area, sources, event types, schedule), ask Claude to update your event scout. Your settings live in `event-scout-config.md` and the routine's instructions in `event-scout-routine-prompt.md`, both in the folder where you set it up.
-- To pause or delete the routine, go to https://claude.ai/code/routines. Routines can't be deleted from Claude Code.
-- To remove the events, delete them in Google Calendar. Search for "Event Scout" to find them.
-
-## Changing or removing it
 - To change anything (area, sources, event types, schedule), ask Claude to update your event scout. Your settings live in `event-scout-config.md` and the routine's instructions in `event-scout-routine-prompt.md`, in the folder where you set it up.
-- To pause or delete the routine, go to https://claude.ai/code/routines. Routines can't be deleted from Claude Code.
+- To pause, resume, run it now, or change its schedule, just ask Claude. Claude does it for you.
+- To see it in the app: open the **Code** tab and click **Scheduled** in the sidebar (the app calls routines "scheduled tasks"). Each run's results are in its **History**.
+- To delete it: open it from **Scheduled**, open the menu next to its name, and choose **Delete**. If the app doesn't offer Delete for a cloud task, do the same at claude.ai/code/routines.
 - To remove the events, delete them in Google Calendar. Search for "Event Scout" to find them.
 - To remove the plugin: `/plugin uninstall gtm-event-scout-agent@oweng22-skills`.
 
