@@ -1,4 +1,4 @@
-# Routine prompt template (v2)
+# Routine prompt template
 
 Fill in every {{PLACEHOLDER}} from `event-scout-config.md` and the source list. Keep exactly one of the calendar blocks ([IF GOOGLE CALENDAR] or [IF SUMMARY ONLY]) and delete the other, then delete the [IF ...] and [END IF] marker lines. Keep [IF OUTLOOK READ CHECK] only if the Microsoft 365 connector is attached. Everything below the line is the prompt. It must stand on its own, because the cloud agent remembers nothing from setup.
 

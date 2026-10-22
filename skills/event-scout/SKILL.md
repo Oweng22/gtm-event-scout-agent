@@ -3,15 +3,15 @@ name: event-scout
 description: Interview a user about their company, who they want to meet, their city and travel radius, and the kinds of events they like, then find their local networking sources (chambers, BNI, Rotary, young professional groups, industry associations, regional conferences) and set up a weekly cloud routine that finds business and networking events, verifies them on official pages, adds them to the user's calendar (Google Calendar directly, or Outlook through a Google Calendar subscription), and re-checks and corrects its own events every week. Use when someone asks for a weekly event finder, a networking calendar, "find events near me to meet clients," a local event scout, or wants a scheduled agent that adds business events to their calendar. Works for any company and any city.
 ---
 
-# GTM Event Scout Agent (v2)
+# GTM Event Scout Agent
 
 Set up a weekly cloud routine that finds networking and business events for a specific company in a specific area, puts verified events on the user's calendar, and keeps those events correct as organizers publish times or change details. Work in five phases, in order. Don't skip the interview: the cloud agent starts with zero context, so the routine is only as good as what you learn here.
 
-v2 includes the fixes from field testing. The "Lessons from testing" section at the end says why each rule exists; read it before you change any rule.
+The "Lessons from testing" section at the end says why each rule exists; read it before you change any rule.
 
 ## Phase 0: Check prerequisites
 
-Check each item and tell the user plainly what is missing. The user should never have to open any of these files. Do everything you can yourself. For the steps only the user can do (signing in to connectors on claude.ai, setting the environment's network access, subscribing Outlook to Google Calendar), give them the exact click-by-click steps from `setup-steps.md` (next to this file) in chat, at the moment each step is needed, then wait and confirm it worked before moving on.
+Check each item and tell the user plainly what is missing. The user should never have to open any of these files. Do everything you can yourself. For the steps only the user can do (connecting the calendar connectors, setting the environment's network access, subscribing Outlook to Google Calendar), give them the exact click-by-click steps from `setup-steps.md` (next to this file) in chat, at the moment each step is needed, then wait and confirm it worked before moving on.
 
 1. **Cloud routines.** Load `RemoteTrigger` (`ToolSearch select:RemoteTrigger`) and call `action: "list"`. If routines aren't available, offer the fallback: you run the same search on demand in this session, using `event-scout-config.md` and the template as instructions.
 2. **Calendar write path.** Run `session_connectors_status` (load `mcp__ccd_connectors__session_connectors_status` if needed) and decide which path applies:
@@ -19,7 +19,7 @@ Check each item and tell the user plainly what is missing. The user should never
    - **Microsoft 365 connector connected:** call its `get_granted_scopes`. It usually has only `Calendars.Read` and no create-event tool, so it cannot write events. Use it read-only, to skip events the user already has and to flag conflicts.
    - **User lives in Outlook:** the routine writes to Google Calendar and the user subscribes Outlook to that Google calendar with its **secret** iCal address (`setup-steps.md`, step 3). Do not try to "invite" the user's Outlook address: if the Google account uses the same email address, the user is the organizer and Google sends no invite. The **public** iCal address fails with "Couldn't import calendar" unless the calendar is public. Never ask the user to make their calendar public.
    - **No writable calendar:** fall back to a weekly summary with one-click "Add to calendar" links (template, `[IF SUMMARY ONLY]` block).
-   If the user connects an app during the session, re-run `session_connectors_status`; new connectors can take a moment to appear.
+   **Connecting a connector happens in the app, not a browser.** Don't send the user to a website. Load `mcp__mcp-registry__search_mcp_registry` and search for it (for example `["google calendar"]`, or `["microsoft 365", "outlook"]`), then call `mcp__mcp-registry__suggest_connectors` with its `directoryUuid` so a **Connect** button appears right in the chat. If those tools aren't available, give the in-app steps from step 1 of the user setup steps. Connectors belong to the user's Claude account, so one connected in the app is also available to the cloud routine. After the user connects, re-run `session_connectors_status`; new connectors can take a moment to appear.
 3. **Network access for the routine's cloud environment.** The default environment can block outbound internet. Then every WebFetch fails with `getaddrinfo ENOTFOUND` and the routine works only from search snippets, which misses most events. You can't change this through the API. Tell the user to set the environment's network access to Full (`setup-steps.md`, step 2), and confirm it in the first test run's log.
 
 ## Phase 1: Interview
@@ -53,7 +53,7 @@ Use AskUserQuestion, up to 4 questions per call, with concrete options and a rec
 
 **Calendar and delivery**
 16. The write path from Phase 0, and the calendar account.
-17. Teammates: v2 adds events with no attendees, so nobody gets invitations. If teammates want the events, they can subscribe to the same Google calendar.
+17. Teammates: the routine adds events with no attendees, so nobody gets invitations. If teammates want the events, they can subscribe to the same Google calendar.
 18. Writing preferences for event text (for example "no em dashes").
 
 **Schedule and limits**

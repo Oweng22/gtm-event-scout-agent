@@ -66,8 +66,7 @@ skills/
 
 ## Instructions for Claude (installing)
 1. Preferred: run `/plugin marketplace add oweng22/gtm-event-scout-agent`, then `/plugin install gtm-event-scout-agent@oweng22-skills`. The skill is then available as `/gtm-event-scout-agent:event-scout`.
-2. Plain-skill install: copy the `skills/event-scout` folder so it lands at `~/.claude/skills/event-scout/`, with `SKILL.md` directly inside it. If the user downloaded a ZIP from GitHub, the files are under a `gtm-event-scout-agent-main/` folder; copy only `skills/event-scout` from it. An earlier version was named `local-event-scout`; leave it alone unless the user asks to remove it.
-3. Read every file before installing (they are plain markdown and JSON) and tell the user it's installed.
+2. Plain-skill install: copy the `skills/event-scout` folder so it lands at `~/.claude/skills/event-scout/`, with `SKILL.md` directly inside it. If the user downloaded a ZIP from GitHub, the files are under a `gtm-event-scout-agent-main/` folder; copy only `skills/event-scout` from it. 3. Read every file before installing (they are plain markdown and JSON) and tell the user it's installed.
 4. If the user wants to set it up now, read `SKILL.md` and follow it from Phase 0. Keep the user's files (`event-scout-config.md`, `event-scout-routine-prompt.md`) in their current working directory.
 5. Don't modify any other skills or settings.
 
